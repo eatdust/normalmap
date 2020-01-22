@@ -19,7 +19,7 @@
 #ifndef NORMAL_MAP
 #define NORMAL_MAP
 
-#include <magick/MagickCore.h>
+#include <MagickCore/MagickCore.h>
 
 #define ENUM_EACH(PARAM) PARAM,
 #define STR_EACH(PARAM) #PARAM,
@@ -38,17 +38,38 @@
     DO(MAX_FILTER_TYPE)
 #define FILTER_TYPE_COUNT (10)
 
+#define EACH_ALPHA_TYPE(DO) \
+    DO(ALPHA_NONE) \
+    DO(ALPHA_HEIGHT) \
+    DO(ALPHA_INVERSE_HEIGHT) \
+    DO(ALPHA_ZERO) \
+    DO(ALPHA_ONE) \
+    DO(ALPHA_INVERT) \
+    DO(ALPHA_MAP) \
+    DO(MAX_ALPHA_TYPE)
+#define ALPHA_TYPE_COUNT (8)
+
 enum FILTER_TYPE { EACH_FILTER_TYPE(ENUM_EACH) };
 
 static char * FILTER_TYPE_NAMES[] = {
     EACH_FILTER_TYPE(STR_EACH)
 };
 
-enum ALPHA_TYPE
+
+enum ALPHA_TYPE { EACH_ALPHA_TYPE(ENUM_EACH) };
+
+static char * ALPHA_TYPE_NAMES[] = {
+    EACH_ALPHA_TYPE(STR_EACH)
+};
+
+
+
+/*enum ALPHA_TYPE
 {
    ALPHA_NONE, ALPHA_HEIGHT, ALPHA_INVERSE_HEIGHT, ALPHA_ZERO, ALPHA_ONE,
    ALPHA_INVERT, ALPHA_MAP, MAX_ALPHA_TYPE
 };
+*/
 
 enum CONVERSION_TYPE
 {

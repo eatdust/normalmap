@@ -23,7 +23,6 @@
 #include <inttypes.h>
 #include <time.h>
 #include <unistd.h>
-#include <magick/MagickCore.h>
 #include "normalmap.h"
 
 #define PREVIEW_SIZE 150
@@ -382,6 +381,8 @@ int32_t normalmap(Image * img, Image * nm_img, NormalmapVals nmapvals)
 
    ExceptionInfo *exception;
 
+   exception = AcquireExceptionInfo();
+   
    bpp = 4; // TODO drawable->bpp;
    
    if(nmapvals.filter < 0 || nmapvals.filter >= MAX_FILTER_TYPE)
@@ -984,7 +985,7 @@ int32_t normalmap(Image * img, Image * nm_img, NormalmapVals nmapvals)
 #undef HEIGHT
 #undef HEIGHT_WRAP
 
-   ImportImagePixels(nm_img, 0, 0, width, height, "RGBA", CharPixel, dst);
+   ImportImagePixels(nm_img, 0, 0, width, height, "RGBA", CharPixel, dst,exception);
 
    free(heights);
    free(src);
@@ -992,6 +993,8 @@ int32_t normalmap(Image * img, Image * nm_img, NormalmapVals nmapvals)
    free(kernel_du);
    free(kernel_dv);
    if(amap) free(amap);
+
+   (void)DestroyExceptionInfo(exception);
    
    return(0);
 }

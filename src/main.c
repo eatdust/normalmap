@@ -50,6 +50,8 @@ void usage() {
 "    -s scale. default 1"
 "    -f filter. default FILTER_NONE\n"
 "      values: " EACH_FILTER_TYPE(STR_EACH_SEP_WS) "\n"
+"    -a alpha. default ALPHA_NONE\n"
+"      values: " EACH_ALPHA_TYPE(STR_EACH_SEP_WS) "\n"		   
 "",
 progname); 
 }
@@ -63,7 +65,7 @@ int main(int argc,char **argv) {
     bflag = 0;
     // the following is not buffer overflow safe.
     // it is not safe to use it in a remote service
-    while ((ch = getopt(argc, argv, "f:s:h")) != -1) {
+    while ((ch = getopt(argc, argv, "a:f:s:h")) != -1) {
          switch (ch) {
          case 's':
              nmapvals.scale = strtod(optarg, &endptr);
@@ -80,6 +82,18 @@ int main(int argc,char **argv) {
                  printf("unkown filter: %s\n", optarg);
              }
              break;
+	 case 'a':
+	   for (int i = 0; i < ALPHA_TYPE_COUNT; i++) {
+	     if (strcmp(ALPHA_TYPE_NAMES[i], optarg) == 0) {
+	       nmapvals.alpha = i;
+	       found = 1;
+	       break;
+	     }
+	   }
+	   if (!found) {
+	     printf("unkown alpha: %s\n", optarg);
+	   }
+	   break;
          case 'h':
          default:
                  usage();
@@ -109,14 +123,14 @@ int main(int argc,char **argv) {
 
     while ((image=RemoveFirstImageFromList(&images)) != (Image *) NULL) {
 
-        MagickPixelPacket pixel_packet;
+        PixelInfo pixel_info;
         ImageInfo * nm_info = CloneImageInfo((ImageInfo *) NULL);
-        Image * nm_image = NewMagickImage(nm_info, image->columns, image->rows, &pixel_packet);
+        Image * nm_image = NewMagickImage(nm_info, image->columns, image->rows, &pixel_info,exception);
 
         normalmap(image, nm_image, nmapvals);
 
         (void) strcpy(nm_image->filename, argv[1]);
-        WriteImage(image_info, nm_image);
+        WriteImage(image_info, nm_image,exception);
         (void)DestroyImageList(nm_image);
         (void)DestroyImageInfo(nm_info);
     }
