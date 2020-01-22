@@ -47,7 +47,7 @@ void usage() {
     (void) fprintf(stdout, "usage: %s [options] <image> <normal_map>\n"
 ""
 "  Options:\n"
-"    -s scale. default 1"
+"    -s scale. default 1\n"
 "    -f filter. default FILTER_NONE\n"
 "      values: " EACH_FILTER_TYPE(STR_EACH_SEP_WS) "\n"
 "    -a alpha. default ALPHA_NONE\n"
