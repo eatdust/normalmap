@@ -27,7 +27,7 @@
 
 NormalmapVals nmapvals =
 {
-   .filter = FILTER_NONE,
+ .filter = FILTER_NONE,
    .minz = 0.0,
    .scale = 2.0,
    .wrap = 1,
@@ -123,16 +123,29 @@ int main(int argc,char **argv) {
 
     while ((image=RemoveFirstImageFromList(&images)) != (Image *) NULL) {
 
-        PixelInfo pixel_info;
-        ImageInfo * nm_info = CloneImageInfo((ImageInfo *) NULL);
-        Image * nm_image = NewMagickImage(nm_info, image->columns, image->rows, &pixel_info,exception);
+      ImageInfo * nm_info = CloneImageInfo((ImageInfo *) NULL);
+      
+#ifndef MAGICK6      
+      PixelInfo pixel_info;
+      Image * nm_image = NewMagickImage(nm_info, image->columns, image->rows, &pixel_info,exception);
+#else
+      MagickPixelPacket pixel_info;
+      Image * nm_image = NewMagickImage(nm_info, image->columns, image->rows, &pixel_info);
+#endif	
 
-        normalmap(image, nm_image, nmapvals);
+        
+      normalmap(image, nm_image, nmapvals);
 
-        (void) strcpy(nm_image->filename, argv[1]);
-        WriteImage(image_info, nm_image,exception);
-        (void)DestroyImageList(nm_image);
-        (void)DestroyImageInfo(nm_info);
+      (void) strcpy(nm_image->filename, argv[1]);
+
+#ifndef MAGICK6
+      WriteImage(image_info, nm_image,exception);
+#else
+      WriteImage(image_info, nm_image);
+#endif	
+
+      (void)DestroyImageList(nm_image);
+      (void)DestroyImageInfo(nm_info);
     }
 
     image_info=DestroyImageInfo(image_info);

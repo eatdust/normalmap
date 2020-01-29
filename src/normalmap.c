@@ -985,7 +985,11 @@ int32_t normalmap(Image * img, Image * nm_img, NormalmapVals nmapvals)
 #undef HEIGHT
 #undef HEIGHT_WRAP
 
+#ifndef MAGICK6   
    ImportImagePixels(nm_img, 0, 0, width, height, "RGBA", CharPixel, dst,exception);
+#else
+   ImportImagePixels(nm_img, 0, 0, width, height, "RGBA", CharPixel, dst);
+#endif
 
    free(heights);
    free(src);

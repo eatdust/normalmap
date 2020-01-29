@@ -19,7 +19,11 @@
 #ifndef NORMAL_MAP
 #define NORMAL_MAP
 
+#ifndef MAGICK6
 #include <MagickCore/MagickCore.h>
+#else
+#include <magick/MagickCore.h>
+#endif
 
 #define ENUM_EACH(PARAM) PARAM,
 #define STR_EACH(PARAM) #PARAM,

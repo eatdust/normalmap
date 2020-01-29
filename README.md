@@ -2,39 +2,46 @@
 Normalmap generator
 ===
 
-Using this tool you can create the following:
+This code allows you to create a RGB
+[**normal map**](https://en.wikipedia.org/wiki/Normal_mapping) from a
+heightmap. The output picture in RGBA and you can store various
+combination of the height in the Alpha channel.
 
-![Diffuse Wall](img/diffuse.png) ![Normal wall](img/normal.png)
 
 Install & libraries
 ---
 
-You need image magick core to be installed. Then just do:
+You need development files for recent imagemagick core versions (API7)
+to be installed. Then just do:
 
-    $ waf configure build
-    Setting top to                           : /home/usr/proj/normalmap 
-    Setting out to                           : /home/usr/proj/normalmap/build 
-    Checking for 'gcc' (c compiler)          : /usr/bin/gcc 
-    Checking for program pkg-config          : /usr/bin/pkg-config 
-    Checking for 'MagickCore'                : yes 
-    'configure' finished successfully (0.044s)
-    'clean' finished successfully (0.004s)
-    Waf: Entering directory `/home/rich/proj/normalmap/build'
-    [1/3] c: src/normalmap.c -> build/src/normalmap.c.1.o
-    [2/3] c: src/main.c -> build/src/main.c.1.o
-    [3/3] cprogram: build/src/normalmap.c.1.o build/src/main.c.1.o -> build/normalmap
-    Waf: Leaving directory `/home/rich/proj/normalmap/build'
-    'build' finished successfully (0.179s)
+    $ waf configure
 
-The binary can then be copied from `build/normalmap`.
+and then
+    
+    $ waf build
+    
+The binary **normalmap** is self-contained and generated within the directory
+`build/`.
 
-Attribution
+Old versions of imagemagick (API6) can be compiled by appending the
+option `--oldmagick` to the configure script:
+
+    $ waf configure --oldmagick
+
+and then
+    
+    $ waf build
+
+
+Original authors
 ---
 
-The algorithm to compute the normal map is taken from the gimp normal map plugin. (https://code.google.com/p/gimp-normalmap/).
-I found no simple way to create such a normal map via command line.
+* Richard Plangger (https://github.com/planrich/normalmap)
+
+* The algorithm to compute the normal map comes from the gimp
+normal map plugin, see (https://code.google.com/p/gimp-normalmap/).
 
 License
 ---
 
-Like the gimp normal map plugin GPLv2
+[**GPLv2**](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
