@@ -2,10 +2,11 @@
 Normalmap generator
 ===
 
-This code allows you to create a RGB
-[**normal map**](https://en.wikipedia.org/wiki/Normal_mapping) from a
-heightmap. The output picture in RGBA and you can store various
-combination of the height in the Alpha channel.
+This code allows you to create a RGB [**normal
+map**](https://en.wikipedia.org/wiki/Normal_mapping) from a
+[**heightmap**](https://en.wikipedia.org/wiki/Heightmap). The output
+picture is RGBA and you can store various combination of the height in
+the Alpha channel.
 
 
 Install & libraries
