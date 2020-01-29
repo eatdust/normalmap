@@ -22,7 +22,7 @@ and then
     $ waf build
     
 The binary **normalmap** is self-contained and generated within the directory
-`build/`.
+`build/`. Simply copy it wherever you like.
 
 Old versions of imagemagick (API6) can be compiled by appending the
 option `--oldmagick` to the configure script:
