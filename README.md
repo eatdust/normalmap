@@ -13,7 +13,7 @@ Install & libraries
 ---
 
 You need development files for recent imagemagick core versions (API7)
-to be installed. Then just do:
+to be installed, as well as `pkg-config`. Then just do:
 
     $ waf configure
 

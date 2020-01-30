@@ -3,7 +3,7 @@
 def options(c):
     c.load("compiler_c")
     c.add_option('--oldmagick',action='store_true',default=False,
-	help='Compile with ImageMagick 6 API')
+	help='compile with ImageMagick 6 API')
 
 def configure(c):
     c.load("compiler_c")
