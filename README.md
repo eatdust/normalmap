@@ -39,8 +39,8 @@ Original authors
 
 * Richard Plangger (https://github.com/planrich/normalmap)
 
-* The algorithm to compute the normal map comes from the gimp
-normal map plugin, see (https://code.google.com/p/gimp-normalmap/).
+* Shawn Kirst (https://code.google.com/p/gimp-normalmap/) for the algorithm
+to compute the normal map in The Gimp.
 
 License
 ---
