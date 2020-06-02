@@ -36,7 +36,7 @@ NormalmapVals nmapvals =
    .conversion = CONVERT_NONE,
    .dudv = DUDV_NONE,
    .xinvert = 0,
-   .yinvert = 0,
+   .yinvert = 1,
    .swapRGB = 0,
    .contrast = 0.0,
    .alphamap_id = 0
@@ -100,7 +100,7 @@ int main(int argc,char **argv) {
 	   nmapvals.xinvert = 1;
 	   break;	   
 	 case 'y':
-	   nmapvals.yinvert = 1;
+	   nmapvals.yinvert = 0;
 	   break;	   
          case 'h':
          default:
