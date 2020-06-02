@@ -36,7 +36,7 @@ NormalmapVals nmapvals =
    .conversion = CONVERT_NONE,
    .dudv = DUDV_NONE,
    .xinvert = 0,
-   .yinvert = 1,
+   .yinvert = 0,
    .swapRGB = 0,
    .contrast = 0.0,
    .alphamap_id = 0
@@ -47,12 +47,12 @@ void usage() {
     (void) fprintf(stdout, "usage: %s [options] <image> <normal_map>\n"
 ""
 "  Options:\n"
-"    -s scale. default 1\n"
+"    -s scale.  default 1\n"
 "    -f filter. default FILTER_NONE\n"
-"      values: " EACH_FILTER_TYPE(STR_EACH_SEP_WS) "\n"
-"    -a alpha. default ALPHA_NONE\n"
-"      values: " EACH_ALPHA_TYPE(STR_EACH_SEP_WS) "\n"		   
-"    -y.       invert y in rgb output\n"
+"      values:  " EACH_FILTER_TYPE(STR_EACH_SEP_WS) "\n"
+"    -a alpha.  default ALPHA_NONE\n"
+"      values:  " EACH_ALPHA_TYPE(STR_EACH_SEP_WS) "\n"		   
+"    -y.        invert y in rgb output\n"
 "",
 progname); 
 }
@@ -66,7 +66,7 @@ int main(int argc,char **argv) {
     bflag = 0;
     // the following is not buffer overflow safe.
     // it is not safe to use it in a remote service
-    while ((ch = getopt(argc, argv, "a:f:s:y:h")) != -1) {
+    while ((ch = getopt(argc, argv, "xya:f:s:h")) != -1) {
          switch (ch) {
          case 's':
              nmapvals.scale = strtod(optarg, &endptr);
@@ -95,8 +95,11 @@ int main(int argc,char **argv) {
 	     printf("unkown alpha: %s\n", optarg);
 	   }
 	   break;
+	 case 'x':
+	   nmapvals.xinvert = 1;
+	   break;	   
 	 case 'y':
-	   nmapvals.yinvert = 0;
+	   nmapvals.yinvert = 1;
 	   break;	   
          case 'h':
          default:
