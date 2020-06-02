@@ -52,7 +52,8 @@ void usage() {
 "      values:  " EACH_FILTER_TYPE(STR_EACH_SEP_WS) "\n"
 "    -a alpha.  default ALPHA_NONE\n"
 "      values:  " EACH_ALPHA_TYPE(STR_EACH_SEP_WS) "\n"		   
-"    -y.        invert y in rgb output\n"
+"    -x.        invert x in normal output\n"
+"    -y.        invert y in normal output\n"
 "",
 progname); 
 }
